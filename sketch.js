@@ -54,6 +54,9 @@ function setup() {
   cloudsGroup = new Group();
   obstaclesGroup = new Group();
   
+  //trex.debug = true ;
+  trex.setCollider('circle');
+  
   score = 0;
   
   gameOver.visible = false;
@@ -65,27 +68,23 @@ function draw() {
   background(0);
   //display score
   text('Score:'+ score, 460, 50);
-  console.log(gameState);
+  //console.log(gameState);
   
   if(gameState === PLAY){
     //move the ground
     ground.velocityX = -(6 + 3*score/100);
     //scoring
     score = score + Math.round(World.frameRate/60);
-    
-    if (score>0 && score%100 === 0){
-      playSound("checkPoint.mp3");
-    }
-    
+     
     if (ground.x < 0){
       ground.x = ground.width/2;
     }
     
      //jump when the space key is pressed
-    if(keyDown("space")){
-      trex.velocityY = -12 ;
+    if(keyDown("space") && trex.y>161){
+      trex.velocityY = -15; 
       }
-  
+      
     //add gravity
     trex.velocityY = trex.velocityY + 0.8;
     
